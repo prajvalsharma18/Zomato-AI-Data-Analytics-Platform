@@ -1,3 +1,4 @@
+```gitignore
 # =========================
 # Credentials / Secrets
 # =========================
@@ -7,12 +8,39 @@ Creds
 .env.*
 *.pem
 *.key
+profiles.yml
 
 # =========================
 # Data
 # =========================
 data/
 *.csv
+
+# =========================
+# Python Virtual Environments
+# =========================
+.venv/
+venv/
+env/
+airflow-venv/
+dbt_venv/
+
+# Any virtual environment folder
+**/.venv/
+**/venv/
+**/env/
+**/airflow-venv/
+**/dbt_venv/
+
+# =========================
+# Python Cache / Build
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
 
 # =========================
 # dbt
@@ -22,12 +50,10 @@ zomato/dbt_packages/
 zomato/logs/
 
 # =========================
-# Python
+# Airflow
 # =========================
-__pycache__/
-*.py[cod]
-.venv/
-venv/
+airflow/logs/
+airflow/.airflowignore/
 
 # =========================
 # OS / IDE
@@ -36,3 +62,9 @@ venv/
 .idea/
 .DS_Store
 Thumbs.db
+
+# =========================
+# Misc
+# =========================
+*.log
+```
