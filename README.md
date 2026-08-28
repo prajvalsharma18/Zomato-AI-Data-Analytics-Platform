@@ -438,3 +438,13 @@ RAG / Text-to-SQL / Analytics
 ```
 
 The result is an end-to-end platform capable of ingesting, transforming, validating, incrementally processing, and intelligently analyzing large-scale food-delivery data.
+
+## Future Improvements
+
+* Implement robust new-data detection using file metadata, load timestamps, or control tables before ingestion.
+* Improve incremental processing with watermarking and change-data tracking.
+* Add automated retries, alerting, and failure notifications in Airflow.
+* Scale AI review enrichment with batching, rate-limit handling, and stronger caching.
+* Add monitoring for pipeline health, data quality, model performance, and API usage.
+* Deploy the platform on AWS with production-grade CI/CD and infrastructure automation.
+
