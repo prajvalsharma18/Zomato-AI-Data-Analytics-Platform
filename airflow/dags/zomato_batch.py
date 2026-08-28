@@ -1,8 +1,7 @@
 from datetime import datetime
-
 from airflow import DAG
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
-from airflow.providers.standard.operators.bash import BashOperator
+from airflow.providers.standard.operators.bash import BashOperator      # Airflow 3 import
 
 DBT = "/opt/airflow/dbt_venv/bin/dbt"
 DBT_PROJECT = "/opt/airflow/dbt/zomato"
@@ -37,5 +36,14 @@ with DAG(
         bash_command=f"{DBT} build --exclude tag:ai --project-dir {DBT_PROJECT} --profiles-dir {DBT_PROJECT}",
     )
 
+    enrich_reviews = BashOperator(
+        task_id="enrich_reviews",
+        bash_command=f"python /opt/airflow/ai/enrich_reviews.py",
+    )
 
-reload_raw >> dbt_build_core
+    dbt_build_ai = BashOperator(
+        task_id = "dbt_build_ai",
+        bash_command=f"{DBT} build --select tag:ai --project-dir {DBT_PROJECT} --profiles-dir {DBT_PROJECT}"
+    )
+
+    reload_raw >> dbt_build_core >> enrich_reviews >> dbt_build_ai
